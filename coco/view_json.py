@@ -30,9 +30,7 @@ Root
 
 
 coco_dir = os.path.dirname(os.path.realpath(__file__))
-# used_for = ["train", "val", "test"]
-used_for = ["val"]
-
+used_for = ["train", "val", "test"]
 
 for i in used_for:
 

@@ -34,6 +34,7 @@ root
         
 '''
 
+
 def create_dir(path):
     if os.path.exists(path):
         shutil.rmtree(path)
@@ -158,6 +159,7 @@ def rle(mask):
 
     return seg
 
+
 def is_crowd(mask):
     path = os.path.dirname(os.path.realpath(__file__))
     coco_dir = path+"/coco"
@@ -181,8 +183,6 @@ def get_bbox(mask):
     return (width*height), [xmin, ymin, width, height]
 
 
-
-# def split_dataset(mode, have_nifti):
 def split_dataset(mode, only_nifti):
     path = os.path.dirname(os.path.realpath(__file__))
     dcm_dir = path+"/dcm"
@@ -224,11 +224,11 @@ def split_dataset(mode, only_nifti):
 
     print(len(train_data), len(val_data), len(test_data))
 
-    # mean, std = to_coco_notation(train_data, "train", mode)
+    mean, std = to_coco_notation(train_data, "train", mode)
     to_coco_notation(val_data, "val", mode)
-    # to_coco_notation(test_data, "test", mode)
+    to_coco_notation(test_data, "test", mode)
 
-    # print(f'mean={mean}, std= {std}')
+    print(f'mean={mean}, std= {std}')
 
 
 def to_coco_notation(img, used_for, mode):
@@ -338,7 +338,7 @@ def to_coco_notation(img, used_for, mode):
 
     with open(f'{coco_dir}/{used_for}/annotation_coco.json', 'w') as f:
         json.dump(coco_dataset, f, ensure_ascii=False, indent=4)
-    # return np.mean(train_total_img_arr, axis=(0,1))/num_train_img, np.std(train_total_img_arr, axis=(0,1))/num_train_img
+    return np.mean(train_total_img_arr, axis=(0,1))/num_train_img, np.std(train_total_img_arr, axis=(0,1))/num_train_img
 
 
 if __name__ == '__main__':
